@@ -3,12 +3,12 @@ require 'rake/gempackagetask'
 require 'rubygems/specification'
 require 'date'
 
-GEM = "vertebra-gem"
+GEM = "vertebra-gemtool"
 GEM_VERSION = "0.0.1"
-AUTHOR = "Your Name"
-EMAIL = "Your Email"
-HOMEPAGE = "http://example.com"
-SUMMARY = "A gem that provides..."
+AUTHOR = "EY Dev Team"
+EMAIL = "dev@engineyard.com"
+HOMEPAGE = "http://code.engineyard.com"
+SUMMARY = "A Vertebra actor and runner for manipulating gems on Linux"
 
 spec = Gem::Specification.new do |s|
   s.name = GEM
@@ -46,4 +46,10 @@ task :make_spec do
   File.open("#{GEM}.gemspec", "w") do |file|
     file.puts spec.to_ruby
   end
+end
+
+task :deploy do
+  puts "Copying gem to gem server..."
+  puts `eyscp pkg/#{GEM}-#{GEM_VERSION}.gem ey01-s00271:/data/gems/gems`
+  puts `eyssh ey01-s00271 'cd /data/gems; gem generate_index'`  
 end

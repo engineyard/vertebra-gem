@@ -1,4 +1,4 @@
-module VertebraGem
+module VertebraGemtool
   class Actor  < ::Vertebra::Actor
     
     provides '/gem'
