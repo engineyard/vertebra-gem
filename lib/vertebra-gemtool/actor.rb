@@ -1,11 +1,11 @@
 module VertebraGemtool
-  class Actor  < ::Vertebra::Actor
+  class Actor < Thor
     
-    provides '/gem'
+    RESOURCES = ['/gem']
 
     def list(args = {})
       filter = args['filter'] || nil
-      ::Gem.source_index.refresh!.search(filter).flatten.collect {|gemspec| "#{gemspec.name} #{gemspec.version}" }
+      ::Gem.source_index.refresh!.search(filter).flatten.collect {|gemspec| "#{gemspec.name} #{gemspec.version}"}
     end
           
     def install(args = {})

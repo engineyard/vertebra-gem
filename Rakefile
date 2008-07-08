@@ -4,7 +4,7 @@ require 'rubygems/specification'
 require 'date'
 
 GEM = "vertebra-gemtool"
-GEM_VERSION = "0.0.1"
+GEM_VERSION = "0.0.2"
 AUTHOR = "EY Dev Team"
 EMAIL = "dev@engineyard.com"
 HOMEPAGE = "http://code.engineyard.com"
@@ -25,7 +25,6 @@ spec = Gem::Specification.new do |s|
   s.executables = %w(vgem)
   
   s.add_dependency "vertebra"
-  s.add_dependency "thor"
   
   s.require_path = 'lib'
   s.autorequire = GEM
