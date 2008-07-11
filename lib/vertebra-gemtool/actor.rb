@@ -1,9 +1,11 @@
-module VertebraGemtool
+require 'thor'
+
+  module VertebraGemtool
   class Actor < Thor
     
     RESOURCES = ['/gem']
 
-    def initialize(opts, *args)
+    def initialize(opts = {}, *args)
       super
     end
     
