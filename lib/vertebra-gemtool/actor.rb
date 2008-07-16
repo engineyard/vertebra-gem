@@ -1,47 +1,64 @@
 require 'thor'
+require 'rubygems'
 
   module VertebraGemtool
   class Actor < Thor
     
     RESOURCES = ['/gem']
-
-    def initialize(opts = {}, *args)
-      super
-    end
     
     desc "list", "Get a list of gems"
     method_options :filter => :optional
     
-    def list(args = {})
-      filter = args['filter'] || nil
+    def list(options = {})
+      filter = options['filter'] || nil
       ::Gem.source_index.refresh!.search(filter).flatten.collect {|gemspec| "#{gemspec.name} #{gemspec.version}"}
     end
     
-    desc "install <gem_name>", "Install a gem"
+    desc "install", "Install a gem"
     method_options :name => :required
           
-    def install(args = {})
-      str = args['name']
-      str << "-#{args['version']}" if args['version']
+    def install(options = {})
+      str = options['name']
+      str << "-#{options['version']}" if options['version']
       `gem install #{str}`
     end
 
-    desc "uninstall <gem_name>", "Install a gem"
+    desc "uninstall", "Install a gem"
     method_options :name => :required
 
-    def uninstall(args = {})
-      str = args['name']
-      str << "-#{args['version']}" if args['version']
+    def uninstall(options = {})
+      str = options['name']
+      str << "-#{options['version']}" if options['version']
       `gem uninstall #{str}`
     end
 
-    desc "reinstall <gem_name>", "Install a gem"
+    desc "reinstall", "Install a gem"
     method_options :name => :required
 
-    def reinstall(args = {})
-      uninstall_output = uninstall('name' => args['name'])
-      install_output = install('name' => args['name'])
+    def reinstall(options = {})
+      uninstall_output = uninstall('name' => options['name'])
+      install_output = install('name' => options['name'])
       uninstall_output + install_output
+    end
+
+    desc "add_source_url", "Add a rubygems source URL"
+    method_options :source_url => :required
+
+    def add_source_url(options = {})
+      `gem source -a #{options['source_url']}`
+    end
+
+    desc "remove_source_url", "Remove a rubygems source URL"
+    method_options :source_url => :required
+
+    def remove_source_url(options = {})
+      `gem source -r #{options['source_url']}`
+    end
+
+    desc "list_sources", "List rubygem sources"
+
+    def remove_source_url(options = {})
+      `gem source -l`.chomp.split("\n").reject { |s| s !~ /^http/ }
     end
 
   end
