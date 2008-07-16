@@ -20,7 +20,7 @@ require 'rubygems'
     def install(options = {})
       str = options['name']
       str << "-#{options['version']}" if options['version']
-      `gem install #{str}`
+      `gem install #{str} --no-rdoc --no-ri`
     end
 
     desc "uninstall", "Install a gem"
