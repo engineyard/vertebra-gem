@@ -1,5 +1,5 @@
-require 'thor'
 require 'rubygems'
+require 'thor'
 
   module VertebraGemtool
   class Actor < Thor
@@ -20,7 +20,7 @@ require 'rubygems'
     def install(options = {})
       str = options['name']
       str << "-#{options['version']}" if options['version']
-      `gem install #{str} --no-rdoc --no-ri`
+      shell "gem install #{str} --no-rdoc --no-ri"
     end
 
     desc "uninstall", "Install a gem"
@@ -29,7 +29,7 @@ require 'rubygems'
     def uninstall(options = {})
       str = options['name']
       str << "-#{options['version']}" if options['version']
-      `gem uninstall #{str}`
+      shell "gem uninstall #{str}"
     end
 
     desc "reinstall", "Install a gem"
@@ -45,20 +45,20 @@ require 'rubygems'
     method_options :source_url => :required
 
     def add_source_url(options = {})
-      `gem source -a #{options['source_url']}`
+      shell "gem source -a #{options['source_url']}"
     end
 
     desc "remove_source_url", "Remove a rubygems source URL"
     method_options :source_url => :required
 
     def remove_source_url(options = {})
-      `gem source -r #{options['source_url']}`
+      shell "gem source -r #{options['source_url']}"
     end
 
     desc "list_sources", "List rubygem sources"
 
     def remove_source_url(options = {})
-      `gem source -l`.chomp.split("\n").reject { |s| s !~ /^http/ }
+      shell "gem source -l".chomp.split("\n").reject { |s| s !~ /^http/ }
     end
 
   end
