@@ -25,6 +25,7 @@ spec = Gem::Specification.new do |s|
   s.executables = %w(vgem)
   
   s.add_dependency "vertebra"
+  s.add_dependency "thor"
   
   s.require_path = 'lib'
   s.autorequire = GEM
