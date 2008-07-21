@@ -9,7 +9,7 @@ describe VertebraGemtool do
   end
      
   before(:each) do
-    @options = {'name' => 'orderedhash'}
+    @options = {'name' => 'vertebra-testgem'}
     @actor = VertebraGemtool::Actor.new(@options)
   end
 
