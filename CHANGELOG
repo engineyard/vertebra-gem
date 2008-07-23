@@ -1,4 +1,5 @@
 -- 0.1.1
+* use new open4 spawn method
 
 -- 0.1.0
 * Initial Release
