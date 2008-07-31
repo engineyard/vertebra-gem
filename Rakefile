@@ -4,7 +4,7 @@ require 'rubygems/specification'
 require 'date'
 
 GEM = "vertebra-gemtool"
-GEM_VERSION = "0.1.1"
+GEM_VERSION = "0.1.2"
 AUTHOR = "EY Dev Team"
 EMAIL = "dev@engineyard.com"
 HOMEPAGE = "http://code.engineyard.com"
