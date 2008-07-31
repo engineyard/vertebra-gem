@@ -21,7 +21,7 @@ require 'thor'
     def install(options = {})
       str = options['name']
       str << "-#{options['version']}" if options['version']
-      spawn "gem install --no-rdoc --no-ri", str
+      spawn "gem", "install", str, "--no-rdoc", "--no-ri"
     end
 
     desc "uninstall", "Install a gem"
@@ -30,7 +30,7 @@ require 'thor'
     def uninstall(options = {})
       str = options['name']
       str << "-#{options['version']}" if options['version']
-      spawn "gem uninstall", str
+      spawn "gem", "uninstall", str
     end
 
     desc "reinstall", "Install a gem"
@@ -46,21 +46,21 @@ require 'thor'
     method_options :source_url => :required
 
     def add_source_url(options = {})
-      spawn "gem source -a", options['source_url']
+      spawn "gem", "source", "-a", options['source_url']
     end
 
     desc "remove_source_url", "Remove a rubygems source URL"
     method_options :source_url => :required
 
     def remove_source_url(options = {})
-      spawn "gem source -r", options['source_url']
+      spawn "gem", "source", "-r", options['source_url']
     end
 
     desc "list_sources", "List rubygem sources"
-
     def remove_source_url(options = {})
-      spawn "gem source -l".chomp.split("\n").reject { |s| s !~ /^http/ }
+      spawn "gem", "source", "-l" do |output|
+        output.chomp.split("\n").reject { |s| s !~ /^http/ }
+      end
     end
-
   end
 end
