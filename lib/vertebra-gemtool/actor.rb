@@ -1,6 +1,7 @@
 require 'thor'
 require 'pp'
 require 'vertebra/actor'
+require 'vertebra/extensions'
 
 module VertebraGemtool
   class Actor < Vertebra::Actor
@@ -64,7 +65,7 @@ module VertebraGemtool
     end
 
     desc "list_sources", "List rubygem sources"
-    def remove_source_url
+    def list_sources
       spawn "gem", "source", "-l" do |output|
         output.chomp.split("\n").reject { |s| s !~ /^http/ }
       end
