@@ -1,3 +1,6 @@
+-- 0.1.6
+* Update for new thor options and inherit again from Vertebra::Actor
+
 -- 0.1.2
 * fix spawn argument passing
 * use spawn formatter for sources list
