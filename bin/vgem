@@ -1,4 +1,8 @@
 #!/usr/bin/env ruby
-
-require File.dirname(__FILE__) + '/../lib/vertebra-gem/actor'
-VertebraGemtool::VGem.start
+require 'rubygems'
+require File.dirname(__FILE__) + '/../lib/vertebra-gemtool/actor'
+begin
+VertebraGemtool::Actor.start
+rescue Thor::Options::Error => e
+  puts e.message
+end
