@@ -11,7 +11,7 @@ module VertebraGemtool
     desc "list", "Get a list of gems"
     method_options :filter => :optional
     
-    def list
+    def list(options = {})
       filter = options['filter'] || nil
       output = spawn "gem", "list" do |output|
         gemlist = output.chomp.split("\n").reject { |g| g =~ /^\*\*\* / || g.empty? }
@@ -26,7 +26,7 @@ module VertebraGemtool
     desc "install", "Install a gem"
     method_options :name => :required
           
-    def install
+    def install(options = {})
       str = options['name']
       str << "-#{options['version']}" if options['version']
       spawn "gem", "install", str, "--no-rdoc", "--no-ri"
@@ -35,7 +35,7 @@ module VertebraGemtool
     desc "uninstall", "Install a gem"
     method_options :name => :required
 
-    def uninstall
+    def uninstall(options = {})
       str = options['name']
       str << "-#{options['version']}" if options['version']
       spawn "gem", "uninstall", str
@@ -44,7 +44,7 @@ module VertebraGemtool
     desc "reinstall", "Install a gem"
     method_options :name => :required
 
-    def reinstall
+    def reinstall(options = {})
       uninstall_output = uninstall('name' => options['name'])
       install_output = install('name' => options['name'])
       uninstall_output + install_output
@@ -53,19 +53,19 @@ module VertebraGemtool
     desc "add_source_url", "Add a rubygems source URL"
     method_options :source_url => :required
 
-    def add_source_url
+    def add_source_url(options = {})
       spawn "gem", "source", "-a", options['source_url']
     end
 
     desc "remove_source_url", "Remove a rubygems source URL"
     method_options :source_url => :required
 
-    def remove_source_url
+    def remove_source_url(options = {})
       spawn "gem", "source", "-r", options['source_url']
     end
 
     desc "list_sources", "List rubygem sources"
-    def list_sources
+    def list_sources(options = {})
       spawn "gem", "source", "-l" do |output|
         output.chomp.split("\n").reject { |s| s !~ /^http/ }
       end
