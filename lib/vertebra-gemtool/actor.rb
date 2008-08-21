@@ -28,8 +28,10 @@ module VertebraGemtool
           
     def install(options = {})
       str = options['name']
-      str << "-#{options['version']}" if options['version']
-      spawn "gem", "install", str, "--no-rdoc", "--no-ri"
+      args = ["gem", "install", str]
+      args = args + ['-v', options['version']] if options['version']
+      args = args + ["--no-rdoc", "--no-ri"]
+      spawn args
     end
 
     desc "uninstall", "Install a gem"
@@ -39,15 +41,6 @@ module VertebraGemtool
       str = options['name']
       str << "-#{options['version']}" if options['version']
       spawn "gem", "uninstall", str
-    end
-
-    desc "reinstall", "Install a gem"
-    method_options :name => :required
-
-    def reinstall(options = {})
-      uninstall_output = uninstall('name' => options['name'])
-      install_output = install('name' => options['name'])
-      uninstall_output + install_output
     end
 
     desc "add_source_url", "Add a rubygems source URL"

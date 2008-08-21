@@ -1,0 +1,4 @@
+*** CURRENT SOURCES ***
+
+http://gems.rubyforge.org
+http://gems.github.com

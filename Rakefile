@@ -2,9 +2,11 @@ require 'rubygems'
 require 'rake/gempackagetask'
 require 'rubygems/specification'
 require 'date'
+require 'rake/testtask'
+require "spec/rake/spectask"
 
 GEM = "vertebra-gemtool"
-GEM_VERSION = "0.1.6"
+GEM_VERSION = "0.1.7"
 AUTHOR = "EY Dev Team"
 EMAIL = "dev@engineyard.com"
 HOMEPAGE = "http://code.engineyard.com"
@@ -48,3 +50,10 @@ task :make_spec do
     file.puts spec.to_ruby
   end
 end
+
+desc "Run unit and integration specs"
+Spec::Rake::SpecTask.new("specs") do |t|
+  t.spec_opts = ["--format", "specdoc", "--colour"]
+  t.spec_files = FileList["spec/**/*_spec.rb"].exclude("spec/acceptance/*_spec.rb")
+end
+
