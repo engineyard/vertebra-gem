@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
+
 require 'rubygems'
 require File.dirname(__FILE__) + '/../lib/vertebra-gemtool/actor'
+
 begin
-VertebraGemtool::Actor.start
+  VertebraGemtool::Actor.start
 rescue Thor::Options::Error => e
   puts e.message
 end
