@@ -5,27 +5,27 @@ require 'vertebra/extensions'
 
 module VertebraGemtool
   class Actor < Vertebra::Actor
-    
+
     provides '/gem'
-        
+
     desc "list", "Get a list of gems"
     method_options :filter => :optional
-    
+
     def list(options = {})
       filter = options['filter'] || nil
       output = spawn "gem", "list" do |output|
         gemlist = output.chomp.split("\n").reject { |g| g =~ /^\*\*\* / || g.empty? }
-        gemlist.inject({}) do |hsh, str| 
+        gemlist.inject({}) do |hsh, str|
           md = str.match(/(.*)\W\((.*)\)/)
           hsh[md[1]] = md[2].split(", ")
           hsh
         end
       end
     end
-    
+
     desc "install", "Install a gem"
     method_options :name => :required
-          
+
     def install(options = {})
       str = options['name']
       args = ["gem", "install", str]
