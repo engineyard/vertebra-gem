@@ -13,7 +13,7 @@ module VertebraGemtool
     
     def list(options = {})
       filter = options['filter'] || nil
-      output = spawn "gem", "list" do |output|
+      output = spawn("gem", "list") do |output|
         gemlist = output.chomp.split("\n").reject { |g| g =~ /^\*\*\* / || g.empty? }
         gemlist.inject({}) do |hsh, str| 
           md = str.match(/(.*)\W\((.*)\)/)

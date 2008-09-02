@@ -1,10 +1,16 @@
 require 'rubygems'
 
 begin
-  require 'thor'
   require 'vertebra/base_runner'
 rescue LoadError
-  puts "Please install the thor and vertebra gems."
+  puts "Please install the vertebra gems."
+  exit
+end
+
+begin
+  require 'thor'
+rescue LoadError
+  puts "Please install the thor gem."
   exit
 end
 
