@@ -14,6 +14,8 @@ rescue LoadError
   exit
 end
 
+# TODO: There should be a way to stub out runners using the information in actor.rb.
+
 module Vertebra
   class VGem < BaseRunner
   
