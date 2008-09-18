@@ -1,4 +1,5 @@
 require 'rubygems'
+require 'vertebra-gemtool/actor'
 
 begin
   require 'vertebra/base_runner'
@@ -20,14 +21,13 @@ module Vertebra
   class VGem < BaseRunner
   
     @@global_method_options = {:node => :optional, :cluster => :required, :only_nodes => :boolean, :slice => :optional}
-      
-    def self.all_method_options(opts = {})
-      self.method_options(@@global_method_options.merge(opts))
-    end
 
-    desc "list", "Get a list of gems"
-    all_method_options :filter => :optional
-    
+    inherit_from_actor(VertebraGemtool::Actor)
+
+#    desc "list", "Get a list of gems"
+#    all_method_options :filter => :optional
+
+    describe_from_actor(:list)
     def list(opts = {})
       gems = broadcast('list', '/gem', opts)
       gems.each { |host, gems| puts "\n#{host}";puts "---"; puts gems.is_a?(Array) ? gems.join("\n") : gems }
