@@ -24,9 +24,6 @@ module Vertebra
 
     inherit_from_actor(VertebraGemtool::Actor)
 
-#    desc "list", "Get a list of gems"
-#    all_method_options :filter => :optional
-
     describe_from_actor(:list)
     def list(opts = {})
       gems = broadcast('list', '/gem', opts)
