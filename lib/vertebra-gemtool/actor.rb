@@ -40,7 +40,7 @@ module VertebraGemtool
 
     bind_op "/gem/install", :install
     desc "/gem/install", "Install a gem"
-    method_options :name => :required
+    method_options :name => :required, :version -> :optional
 
     def install(options = {})
       str = options['name']
