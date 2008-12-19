@@ -6,7 +6,7 @@ require 'rake/testtask'
 require "spec/rake/spectask"
 
 GEM = "vertebra-gemtool"
-GEM_VERSION = "0.2.1"
+GEM_VERSION = "0.3.0"
 AUTHOR = "Engine Yard, Inc."
 HOMEPAGE = "http://vertebra.engineyard.com"
 SUMMARY = "A Vertebra actor and runner for manipulating gems on Linux"
