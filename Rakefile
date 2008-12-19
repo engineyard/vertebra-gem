@@ -7,9 +7,8 @@ require "spec/rake/spectask"
 
 GEM = "vertebra-gemtool"
 GEM_VERSION = "0.2.1"
-AUTHOR = "EY Dev Team"
-EMAIL = "dev@engineyard.com"
-HOMEPAGE = "http://code.engineyard.com"
+AUTHOR = "Engine Yard, Inc."
+HOMEPAGE = "http://vertebra.engineyard.com"
 SUMMARY = "A Vertebra actor and runner for manipulating gems on Linux"
 
 spec = Gem::Specification.new do |s|
@@ -42,6 +41,11 @@ end
 desc "install the gem locally"
 task :install => [:package] do
   sh %{sudo gem install pkg/#{GEM}-#{GEM_VERSION}}
+end
+
+desc "uninstall the gem locally"
+task :uninstall => [:package] do
+  sh %{sudo gem uninstall #{GEM} -v #{GEM_VERSION} -I -x}
 end
 
 desc "create a gemspec file"
