@@ -8,6 +8,7 @@ require "spec/rake/spectask"
 GEM = "vertebra-gemtool"
 GEM_VERSION = "0.3.0"
 AUTHOR = "Engine Yard, Inc."
+EMAIL = "vertebra-dev@googlegroups.com"
 HOMEPAGE = "http://vertebra.engineyard.com"
 SUMMARY = "A Vertebra actor and runner for manipulating gems on Linux"
 
