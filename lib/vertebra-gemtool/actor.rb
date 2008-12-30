@@ -24,13 +24,6 @@ module VertebraGemtool
   class Actor < Vertebra::Actor
     # TODO: These actors need a way to return a useful response in the face of errors encountered when performing an operation.
 
-    # The semantics of this actor are documented here:
-    # https://engineyard.onconfluence.com/display/OSS/Acceptance+Criteria+for+Gem+Agent
-    #
-    # If there are changes or additions to this actor, document them in the comments below
-    # and then just cut and paste the comments back into the wiki document so that the
-    # documentation outside of the code stays current.
-
     provides '/gem'
 
     # A {{list}} request MAY specify a {{filter}} attribute.
