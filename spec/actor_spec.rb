@@ -18,6 +18,9 @@
 require File.dirname(__FILE__) + '/spec_helper'
 #require 'vertebra'
 require 'vertebra-gemtool/actor'
+require 'vertebra/logger'
+
+Vertebra::setup_logger({})
 
 class Vertebra::Actor
   def spawn(*args, &block)
@@ -30,11 +33,19 @@ end
 describe VertebraGemtool::Actor do
   
   before(:all) do
-    @actor = VertebraGemtool::Actor.new
+    @actor = VertebraGemtool::Actor.new(nil,nil,nil)
   end
   
-  it 'should provide /core resource' do
-    @actor.provides.should == [Vertebra::Resource.new('/gem')]
+  it 'should provide /gem resource' do
+    res = Vertebra::Resource.new(['gem'])
+    @actor.provided_resources.to_hash['gem'].should == [res]
+  
+    @actor.provided_operations.matches?(Vertebra::Resource.new(['gem','source','remove']))
+    @actor.provided_operations.matches?(Vertebra::Resource.new(['gem','source','list']))
+    @actor.provided_operations.matches?(Vertebra::Resource.new(['gem','install']))
+    @actor.provided_operations.matches?(Vertebra::Resource.new(['gem','list']))
+    @actor.provided_operations.matches?(Vertebra::Resource.new(['gem','source','add']))
+    @actor.provided_operations.matches?(Vertebra::Resource.new(['gem','uninstall']))
   end
 
   it 'should parse and return hashed gem list' do
